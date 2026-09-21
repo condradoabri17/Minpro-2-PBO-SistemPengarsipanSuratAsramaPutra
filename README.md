@@ -100,8 +100,6 @@ Pada kode tersebut, kata kunci `extends` digunakan untuk menunjukkan bahwa class
 
 Kata kunci `super()` digunakan untuk memanggil constructor dari superclass `Surat`.
 
----
-
 ## Teknologi yang Digunakan
 
 - Bahasa pemrograman: Java
@@ -169,65 +167,7 @@ Berikut adalah dokumentasi proses penggunaan aplikasi ASMAUL.
 
 ![Keluar dari Program](images/14-keluar-program.png)
 
----
-
-## Struktur Folder Project
-
-```text
-ArsipSuratAsmaul
-│
-├── model
-│   ├── Surat.java
-│   ├── SuratMasuk.java
-│   ├── SuratKeluar.java
-│   └── Penghuni.java
-│
-├── main
-│   └── ArsipSuratAsmaul.java
-│
-├── images
-│   ├── diagram-kelas.png
-│   ├── 01-menu-utama.png
-│   ├── 02-menu-surat-masuk.png
-│   ├── 03-tampil-surat-masuk.png
-│   ├── 04-tambah-surat-masuk.png
-│   ├── 05-edit-surat-masuk.png
-│   ├── 06-hapus-surat-masuk.png
-│   ├── 07-kembali-menu-surat-masuk.png
-│   ├── 08-menu-surat-keluar.png
-│   ├── 09-tampil-surat-keluar.png
-│   ├── 10-tambah-surat-keluar.png
-│   ├── 11-edit-surat-keluar.png
-│   ├── 12-hapus-surat-keluar.png
-│   ├── 13-kembali-menu-surat-keluar.png
-│   └── 14-keluar-program.png
-│
-└── README.md
-```
-
----
-
-## Cara Menjalankan Program
-
-1. Pastikan Java Development Kit (JDK) sudah terpasang.
-2. Buka project menggunakan NetBeans.
-3. Jalankan file `ArsipSuratAsmaul.java`.
-4. Pilih menu yang tersedia.
-5. Gunakan pilihan `0` untuk kembali atau keluar dari program.
-
----
-
-## Keterbatasan Aplikasi
-
-- Data disimpan sementara menggunakan `ArrayList`.
-- Data akan hilang ketika program ditutup.
-- Aplikasi masih menggunakan antarmuka console.
-- Aplikasi belum menggunakan database atau penyimpanan permanen.
-
----
-
 ## Penutup
 
 Sistem Arsip Surat Asrama Mahasiswa UNMUL (ASMAUL) dibuat sebagai penerapan konsep dasar Pemrograman Berorientasi Objek menggunakan bahasa Java.
 
-Konsep PBO yang diterapkan dalam aplikasi ini antara lain inheritance, constructor, penggunaan method, serta pemanfaatan `ArrayList` untuk menyimpan data surat selama program berjalan.
