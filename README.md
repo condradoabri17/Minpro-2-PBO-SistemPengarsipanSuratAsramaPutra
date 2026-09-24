@@ -37,14 +37,18 @@ Pada menu Surat Keluar, pengguna dapat melakukan:
 Pada saat menambahkan surat keluar, pengguna akan memilih kategori surat. Sistem kemudian membuat nomor surat secara otomatis berdasarkan kategori, nomor urut, nama organisasi, dan tahun.
 
 **Daftar Kategori Surat**
+
 ![Menu Utama](images/daftar-kategori.png)
 
 **Contoh Nomor surat yang dihasilkan:**
+
 ![Menu Utama](images/contoh-nomor-surat.png)
+
 pada contoh diatas, surat keluar berarti memiliki kategori 6 yaitu surat peringatan, dengan urutan 2 dan tahun keluar 2026.
 
 ### Lihat Data Penghuni
 Pada menu Data Penghuni, pengguna dapat melihat data penghuni yang telah disediakan sebagai data dummy.
+
 ![Menu Utama](images/daftar-penghuni.png)
 
 ## 3. Penerapan Encapsulation
