@@ -5,6 +5,7 @@
 package main;
 import model.SuratKeluar;
 import model.SuratMasuk;
+import model.Penghuni;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,57 +17,113 @@ public class main {
     static Scanner input = new Scanner(System.in);
     static ArrayList<SuratMasuk> daftarSuratMasuk = new ArrayList<>();
     static ArrayList<SuratKeluar> daftarSuratKeluar = new ArrayList<>();
+    static ArrayList<Penghuni> daftarPenghuni = new ArrayList<>();
     
     public static void main(String[] args) {
         
-    SuratMasuk suratMasuk1 = new SuratMasuk(
-        "001/Fakultas-Teknik/2026",
-        "Surat Undangan Rapat",
-        "20-09-2026",
-        "Fakultas Teknik"
-    );
+        SuratMasuk suratMasuk1 = new SuratMasuk(
+            "001/Fakultas-Teknik/2026",
+            "Surat Undangan Rapat",
+            "20-09-2026",
+            "Fakultas Teknik"
+        );
 
-    SuratKeluar suratKeluar1 = new SuratKeluar(
-        "Surat Permohonan Kegiatan",
-        3,
-        "21-09-2026",
-        "Fakultas Teknik"
-    );
+        SuratKeluar suratKeluar1 = new SuratKeluar(
+            "Surat Permohonan Kegiatan",
+            3,
+            "21-09-2026",
+            "Fakultas Teknik"
+        );
 
-    daftarSuratMasuk.add(suratMasuk1);
-    daftarSuratKeluar.add(suratKeluar1);
-        
-    int pilihan;
-        
-    do{
+        Penghuni penghuni1 = new Penghuni(
+            "Aditya Harsa Arga Putra",
+            "2409086008",
+            "Balikpapan",
+            "TEKNIK",
+            "S1-Teknik Geologi",
+            "PENGHUNI AKTIF"
+        );
+
+        Penghuni penghuni2 = new Penghuni(
+            "Reno Abdul Firman",
+            "2509066031",
+            "Bau-Bau",
+            "TEKNIK",
+            "S1-Teknik Kimia",
+            "PENGHUNI AKTIF"
+        );
+
+        Penghuni penghuni3 = new Penghuni(
+            "Abdul Gafar",
+            "2209076044",
+            "Penajam",
+            "TEKNIK",
+            "S1-Teknik Elektro",
+            "ALUMNI"
+        );
+
+        daftarPenghuni.add(penghuni1);
+        daftarPenghuni.add(penghuni2);
+        daftarPenghuni.add(penghuni3);
+        daftarSuratMasuk.add(suratMasuk1);
+        daftarSuratKeluar.add(suratKeluar1);
+
+        int pilihan;
+
+        do {
             System.out.println("============================");
             System.out.println("SISTEM ARSIP SURAT ASRAMA MAHASISWA UNMUL (ASMAUL)\n");
             System.out.println("1. Kelola Surat Masuk");
-            System.out.println("2. kelola Surat Keluar");
+            System.out.println("2. Kelola Surat Keluar");
+            System.out.println("3. Lihat Data Penghuni");
             System.out.println("0. Keluar");
             System.out.println("=============================");
-            
+
             System.out.println("Pilih menu: ");
             pilihan = Integer.parseInt(input.nextLine());
-            
-             if (pilihan == 1) {
+
+            if (pilihan == 1) {
                 menuSuratMasuk();
             }
             else if (pilihan == 2) {
                 menuSuratKeluar();
-            } else if (pilihan == 0) {
+            }
+            else if (pilihan == 3) {
+                menuPenghuni();
+            }
+            else if (pilihan == 0) {
                 System.out.println("Program selesai. Terima kasih!");
-            } else {
+            }
+            else {
                 System.out.println("Pilihan menu tidak valid!");
             }
-        
+
         } while (pilihan != 0);
     }
     
-    public static void menuSuratMasuk() {
-        
-        int pilihanMasuk;
+    public static void menuPenghuni() {
+        System.out.println("============================");
+        System.out.println("DATA PENGHUNI");
 
+        for (int i = 0; i < daftarPenghuni.size(); i++) {
+            Penghuni penghuni = daftarPenghuni.get(i);
+
+            System.out.println("\nData Penghuni ke-" + (i + 1));
+            System.out.println("Nama: " + penghuni.getNama());
+            System.out.println("NIM: " + penghuni.getNim());
+            System.out.println("Asal Daerah: " + penghuni.getAsalDaerah());
+            System.out.println("Fakultas: " + penghuni.getFakultas());
+            System.out.println("Jurusan: " + penghuni.getJurusan());
+            System.out.println("Status: " + penghuni.getStatus());
+            System.out.println("----------------------------");
+        }
+
+        System.out.println("Kembali ke menu utama.");
+    }
+
+    public static void menuSuratMasuk() {
+
+        int pilihanMasuk;
         do{
             System.out.println("============================");
             System.out.println("MENU SURAT MASUK\n");
@@ -76,10 +133,10 @@ public class main {
             System.out.println("4. Hapus Surat Masuk");
             System.out.println("0. Kembali");
             System.out.println("============================="); 
-            
+
             System.out.println("Pilih Menu: ");
             pilihanMasuk = Integer.parseInt(input.nextLine());
-            
+
             if(pilihanMasuk == 1) {
                 if (daftarSuratMasuk.isEmpty()) {
                     System.out.println("\nBelum ada data surat masuk.");
