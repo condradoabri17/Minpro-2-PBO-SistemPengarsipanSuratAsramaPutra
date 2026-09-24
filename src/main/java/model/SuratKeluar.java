@@ -9,16 +9,33 @@ package model;
  * @author LENOVO
  */
 public class SuratKeluar extends Surat {
+    public static int urutanSuratBerikutnya = 1;
+    
     protected int kategoriSurat;
     protected String tanggalKeluarSurat;
     protected String penerima;
 
-    public SuratKeluar(int urutanSurat, String nomorSurat, String perihal, int kategoriSurat, String tanggalKeluarSurat, String penerima) {
-        super(urutanSurat, nomorSurat, perihal);
+    public SuratKeluar(String perihal, int kategoriSurat,
+                       String tanggalKeluarSurat, String penerima) {
+
+        super(urutanSuratBerikutnya, "", perihal);
+
         this.kategoriSurat = kategoriSurat;
         this.tanggalKeluarSurat = tanggalKeluarSurat;
         this.penerima = penerima;
+
+        String[] tanggal = tanggalKeluarSurat.split("-");
+        String tahun = tanggal[2];
+
+        this.nomorSurat = String.format("%02d", kategoriSurat)
+                + "/"
+                + String.format("%03d", urutanSurat)
+                + "/UKMAsramaPutra/"
+                + tahun;
+
+        urutanSuratBerikutnya++;
     }
+    
     
     public String getKategoriSurat() {
         if (kategoriSurat == 1 ){
@@ -80,11 +97,12 @@ public class SuratKeluar extends Surat {
         this.tanggalKeluarSurat = tanggalKeluarSurat;
     }
     
-    public void setPenerima(String penerima) {
+    public void setPenerima(    String penerima) {
         this.penerima = penerima;
     }
     
-    public void tampilkanSuratKeluar () {
+    @Override
+    public void tampilkanDaftarSurat () {
         System.out.println("==========================");
         System.out.println("DAFTAR SURAT KELUAR");
         super.tampilkanDaftarSurat();

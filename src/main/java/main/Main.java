@@ -12,16 +12,33 @@ import java.util.Scanner;
  *
  * @author LENOVO
  */
-public class ArsipSuratAsmaul {
+public class main {
     static Scanner input = new Scanner(System.in);
     static ArrayList<SuratMasuk> daftarSuratMasuk = new ArrayList<>();
     static ArrayList<SuratKeluar> daftarSuratKeluar = new ArrayList<>();
     
     public static void main(String[] args) {
         
-        int pilihan;
+    SuratMasuk suratMasuk1 = new SuratMasuk(
+        "001/Fakultas-Teknik/2026",
+        "Surat Undangan Rapat",
+        "20-09-2026",
+        "Fakultas Teknik"
+    );
+
+    SuratKeluar suratKeluar1 = new SuratKeluar(
+        "Surat Permohonan Kegiatan",
+        3,
+        "21-09-2026",
+        "Fakultas Teknik"
+    );
+
+    daftarSuratMasuk.add(suratMasuk1);
+    daftarSuratKeluar.add(suratKeluar1);
         
-        do{
+    int pilihan;
+        
+    do{
             System.out.println("============================");
             System.out.println("SISTEM ARSIP SURAT ASRAMA MAHASISWA UNMUL (ASMAUL)\n");
             System.out.println("1. Kelola Surat Masuk");
@@ -32,7 +49,7 @@ public class ArsipSuratAsmaul {
             System.out.println("Pilih menu: ");
             pilihan = Integer.parseInt(input.nextLine());
             
-            if (pilihan == 1) {
+             if (pilihan == 1) {
                 menuSuratMasuk();
             }
             else if (pilihan == 2) {
@@ -42,6 +59,7 @@ public class ArsipSuratAsmaul {
             } else {
                 System.out.println("Pilihan menu tidak valid!");
             }
+        
         } while (pilihan != 0);
     }
     
@@ -67,8 +85,7 @@ public class ArsipSuratAsmaul {
                     System.out.println("\nBelum ada data surat masuk.");
                 } else {
                     for (int i = 0; i < daftarSuratMasuk.size(); i++) {
-                        System.out.println("\nData Surat ke-" + (i + 1));
-                        daftarSuratMasuk.get(i).tampilkanSuratMasuk();
+                        daftarSuratMasuk.get(i).tampilkanDaftarSurat();
                     }
                 }
             }  
@@ -94,9 +111,6 @@ public class ArsipSuratAsmaul {
         System.out.println("\n==========================");
         System.out.println("TAMBAH SURAT MASUK");
         
-        System.out.println("Urutan Surat: ");
-        int urutanSurat = Integer.parseInt(input.nextLine());
-        
         System.out.println("Nomor Surat: ");
         String nomorSurat = input.nextLine();
         
@@ -110,7 +124,6 @@ public class ArsipSuratAsmaul {
         String pengirim = input.nextLine();
         
         SuratMasuk suratBaru = new SuratMasuk(
-            urutanSurat,
             nomorSurat,
             perihal,
             tanggalMasukSurat,
@@ -122,31 +135,42 @@ public class ArsipSuratAsmaul {
         System.out.println("Surat Masuk Berhasil Ditambah");
     }
     
-    public static void editSuratMasuk(){
+    public static void editSuratMasuk() {
         System.out.println("==========================");
         System.out.println("EDIT SURAT MASUK");
-        
-        System.out.print("Masukkan nomor data yang ingin diedit: ");
+
+        System.out.print("Masukkan Urutan Surat yang ingin diedit: ");
         int nomorData = Integer.parseInt(input.nextLine());
 
         SuratMasuk surat = daftarSuratMasuk.get(nomorData - 1);
 
-        System.out.print("Nomor Surat baru: ");
+        System.out.print("Nomor Surat baru (" + surat.getNomorSurat() + "): ");
         String nomorSurat = input.nextLine();
 
-        System.out.print("Perihal baru: ");
+        System.out.print("Perihal baru (" + surat.getPerihal() + "): ");
         String perihal = input.nextLine();
 
-        System.out.print("Tanggal Surat Masuk baru: ");
+        System.out.print("Tanggal Surat Masuk baru (" + surat.getTanggalMasukSurat() + "): ");
         String tanggalMasukSurat = input.nextLine();
 
-        System.out.print("Pengirim baru: ");
+        System.out.print("Pengirim baru (" + surat.getPengirim() + "): ");
         String pengirim = input.nextLine();
 
-        surat.setNomorSurat(nomorSurat);
-        surat.setPerihal(perihal);
-        surat.setTanggalMasukSurat(tanggalMasukSurat);
-        surat.setPengirim(pengirim);
+        if (!nomorSurat.isEmpty()) {
+            surat.setNomorSurat(nomorSurat);
+        }
+
+        if (!perihal.isEmpty()) {
+            surat.setPerihal(perihal);
+        }
+
+        if (!tanggalMasukSurat.isEmpty()) {
+            surat.setTanggalMasukSurat(tanggalMasukSurat);
+        }
+
+        if (!pengirim.isEmpty()) {
+            surat.setPengirim(pengirim);
+        }
 
         System.out.println("Surat masuk berhasil diedit!");
     }
@@ -157,6 +181,9 @@ public class ArsipSuratAsmaul {
        daftarSuratMasuk.remove(nomorData - 1);
        System.out.println("Surat masuk berhasil dihapus!");
     }
+    
+    
+//    menu surat keluar
     
     public static void menuSuratKeluar() {
 
@@ -177,8 +204,7 @@ public class ArsipSuratAsmaul {
 
             if (pilihanKeluar == 1) {
                 for (int i = 0; i < daftarSuratKeluar.size(); i++) {
-                    System.out.println("\nData Surat ke-" + (i + 1));
-                    daftarSuratKeluar.get(i).tampilkanSuratKeluar();
+                    daftarSuratKeluar.get(i).tampilkanDaftarSurat();
                 }
             } else if (pilihanKeluar == 2) {
                 tambahSuratKeluar();
@@ -218,58 +244,21 @@ public class ArsipSuratAsmaul {
         System.out.print("Pilih kategori: ");
         int kategoriSurat = Integer.parseInt(input.nextLine());
 
-        System.out.print("Urutan Surat: ");
-        int urutanSurat = Integer.parseInt(input.nextLine());
-
-        String kodeKategori;
-
-        if (kategoriSurat == 1) {
-            kodeKategori = "SK";
-        } else if (kategoriSurat == 2) {
-            kodeKategori = "SU";
-        } else if (kategoriSurat == 3) {
-            kodeKategori = "SPm";
-        } else if (kategoriSurat == 4) {
-            kodeKategori = "SPb";
-        } else if (kategoriSurat == 5) {
-            kodeKategori = "SPp";
-        } else if (kategoriSurat == 6) {
-            kodeKategori = "SP";
-        } else if (kategoriSurat == 7) {
-            kodeKategori = "SM";
-        } else if (kategoriSurat == 8) {
-            kodeKategori = "ST";
-        } else if (kategoriSurat == 9) {
-            kodeKategori = "SKet";
-        } else if (kategoriSurat == 10) {
-            kodeKategori = "SR";
-        } else if (kategoriSurat == 11) {
-            kodeKategori = "SB";
-        } else if (kategoriSurat == 12) {
-            kodeKategori = "SRT";
-        } else if (kategoriSurat == 13) {
-            kodeKategori = "SPg";
-        } else {
-            System.out.println("Kategori tidak valid!");
+        if (kategoriSurat < 1 || kategoriSurat > 13) {
+            System.out.println("Kategori surat tidak valid!");
             return;
         }
-
-        String nomorSurat = kodeKategori + "/" + String.format("%03d", urutanSurat)+ "/UKMAsramaPutra";
-
-        System.out.println("Nomor Surat: " + nomorSurat);
 
         System.out.print("Perihal: ");
         String perihal = input.nextLine();
 
-        System.out.print("Tanggal Keluar Surat: ");
+        System.out.print("Tanggal Keluar Surat (DD-MM-YYYY): ");
         String tanggalKeluarSurat = input.nextLine();
 
         System.out.print("Penerima: ");
         String penerima = input.nextLine();
 
         SuratKeluar suratBaru = new SuratKeluar(
-                urutanSurat,
-                nomorSurat,
                 perihal,
                 kategoriSurat,
                 tanggalKeluarSurat,
@@ -277,94 +266,40 @@ public class ArsipSuratAsmaul {
         );
 
         daftarSuratKeluar.add(suratBaru);
+        System.out.println("Nomor Surat: " + suratBaru.getNomorSurat());
 
         System.out.println("Surat keluar berhasil ditambahkan!");
     }
     
     public static void editSuratKeluar() {
-        System.out.println("\n==========================");
+        System.out.println("==========================");
         System.out.println("EDIT SURAT KELUAR");
 
-        System.out.print("Masukkan nomor data yang ingin diedit: ");
+        System.out.print("Masukkan Urutan Surat yang ingin diedit: ");
         int nomorData = Integer.parseInt(input.nextLine());
 
         SuratKeluar surat = daftarSuratKeluar.get(nomorData - 1);
 
-        System.out.println("\nPilih Kategori Surat:");
-        System.out.println("1. SK - Surat Keputusan");
-        System.out.println("2. SU - Surat Undangan");
-        System.out.println("3. SPm - Surat Permohonan");
-        System.out.println("4. SPb - Surat Pemberitahuan");
-        System.out.println("5. SPp - Surat Peminjaman");
-        System.out.println("6. SP - Surat Peringatan");
-        System.out.println("7. SM - Surat Mandat");
-        System.out.println("8. ST - Surat Tugas");
-        System.out.println("9. SKet - Surat Keterangan");
-        System.out.println("10. SR - Surat Rekomendasi");
-        System.out.println("11. SB - Surat Balasan");
-        System.out.println("12. SRT - Sertifikat");
-        System.out.println("13. SPg - Surat Panggilan");
-
-        System.out.print("Pilih kategori baru: ");
-        int kategoriSurat = Integer.parseInt(input.nextLine());
-
-        String kodeKategori;
-
-        if (kategoriSurat == 1) {
-            kodeKategori = "SK";
-        } else if (kategoriSurat == 2) {
-            kodeKategori = "SU";
-        } else if (kategoriSurat == 3) {
-            kodeKategori = "SPm";
-        } else if (kategoriSurat == 4) {
-            kodeKategori = "SPb";
-        } else if (kategoriSurat == 5) {
-            kodeKategori = "SPp";
-        } else if (kategoriSurat == 6) {
-            kodeKategori = "SP";
-        } else if (kategoriSurat == 7) {
-            kodeKategori = "SM";
-        } else if (kategoriSurat == 8) {
-            kodeKategori = "ST";
-        } else if (kategoriSurat == 9) {
-            kodeKategori = "SKet";
-        } else if (kategoriSurat == 10) {
-            kodeKategori = "SR";
-        } else if (kategoriSurat == 11) {
-            kodeKategori = "SB";
-        } else if (kategoriSurat == 12) {
-            kodeKategori = "SRT";
-        } else if (kategoriSurat == 13) {
-            kodeKategori = "SPg";
-        } else {
-            System.out.println("Kategori tidak valid!");
-            return;
-        }
-
-        System.out.print("Urutan Surat baru: ");
-        int urutanSurat = Integer.parseInt(input.nextLine());
-
-        String nomorSurat = kodeKategori + "/"
-                + String.format("%03d", urutanSurat)
-                + "/UKMAsramaPutra";
-
-        System.out.println("Nomor Surat baru: " + nomorSurat);
-
-        System.out.print("Perihal baru: ");
+        System.out.print("Perihal baru (" + surat.getPerihal() + "): ");
         String perihal = input.nextLine();
 
-        System.out.print("Tanggal Keluar Surat baru: ");
+        System.out.print("Tanggal Keluar Surat baru (" + surat.getTanggalKeluarSurat() + "): ");
         String tanggalKeluarSurat = input.nextLine();
 
-        System.out.print("Penerima baru: ");
+        System.out.print("Penerima baru (" + surat.getPenerima() + "): ");
         String penerima = input.nextLine();
 
-        surat.setUrutanSurat(urutanSurat);
-        surat.setNomorSurat(nomorSurat);
-        surat.setPerihal(perihal);
-        surat.setKategoriSurat(kategoriSurat);
-        surat.setTanggalKeluarSurat(tanggalKeluarSurat);
-        surat.setPenerima(penerima);
+        if (!perihal.isEmpty()) {
+            surat.setPerihal(perihal);
+        }
+
+        if (!tanggalKeluarSurat.isEmpty()) {
+            surat.setTanggalKeluarSurat(tanggalKeluarSurat);
+        }
+
+        if (!penerima.isEmpty()) {
+            surat.setPenerima(penerima);
+        }
 
         System.out.println("Surat keluar berhasil diedit!");
     }

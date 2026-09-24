@@ -10,4 +10,5 @@
         <maven.compiler.release>21</maven.compiler.release>
         <exec.mainClass>com.mycompany.arsipsuratasmaul.ArsipSuratAsmaul</exec.mainClass>
     </properties>
+    <name>CheckPoint2</name>
 </project>

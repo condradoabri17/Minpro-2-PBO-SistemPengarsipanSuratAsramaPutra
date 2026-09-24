@@ -9,13 +9,15 @@ package model;
  * @author LENOVO
  */
 public class SuratMasuk extends Surat {
+    public static int urutanSuratBerikutnya = 1;
     protected String tanggalMasukSurat;
     protected String pengirim;
     
-    public SuratMasuk(int urutanSurat, String nomorSurat, String perihal, String tanggalMasukSurat,String pengirim){
-        super(urutanSurat, nomorSurat, perihal);
+    public SuratMasuk(String nomorSurat, String perihal, String tanggalMasukSurat,String pengirim){
+        super(urutanSuratBerikutnya, nomorSurat, perihal);
         this.tanggalMasukSurat = tanggalMasukSurat;
         this.pengirim =  pengirim;
+        urutanSuratBerikutnya++;
     } 
     
     public String getTanggalMasukSurat() {
@@ -34,7 +36,8 @@ public class SuratMasuk extends Surat {
         this.pengirim = pengirim;
     }
     
-    public void tampilkanSuratMasuk () {
+    @Override
+    public void tampilkanDaftarSurat() {
         System.out.println("==========================");
         System.out.println("DAFTAR SURAT MASUK");
         super.tampilkanDaftarSurat();
